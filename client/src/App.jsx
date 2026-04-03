@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -6,8 +7,17 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ThemeToggle from './components/ThemeToggle'
 import LiquidHeroBackground from './components/LiquidHeroBackground'
+import AllProjects from './pages/AllProjects'
 
 export default function App() {
+  const [currentPath, setCurrentPath] = useState(window.location.hash)
+
+  useEffect(() => {
+    const handleHashChange = () => setCurrentPath(window.location.hash)
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
   return (
     <>
       <ThemeToggle />
@@ -152,10 +162,16 @@ export default function App() {
       <LiquidHeroBackground />
       <Navbar />
       <main>
-        <Hero />
-        <About />
-        <Projects />
-        <Contact />
+        {currentPath === '#all-projects' ? (
+          <AllProjects />
+        ) : (
+          <>
+            <Hero />
+            <About />
+            <Projects />
+            <Contact />
+          </>
+        )}
       </main>
       <Footer />
     </>

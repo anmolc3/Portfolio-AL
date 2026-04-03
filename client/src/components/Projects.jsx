@@ -50,23 +50,39 @@ function ProjectSkeleton() {
 export default function Projects() {
   const { data: projects, loading, error } = useFetch('/api/projects')
 
-  // Fallback data if API unavailable
-  const fallback = [
-    { id: 1, title: 'EdZure Legal Platform', description: 'Full-stack legal services platform with Firebase, React and real-time document processing.', tags: ['React', 'Firebase', 'Node.js'], gradient: 'linear-gradient(135deg,#6C63FF,#EA2E00)' },
-    { id: 2, title: '3D Product Visualizer', description: 'Interactive WebGL product configurator with real-time material and lighting control.', tags: ['Three.js', 'GLSL', 'WebGL'], gradient: 'linear-gradient(135deg,#00D4FF,#6C63FF)' },
-    { id: 3, title: 'AI Analytics Dashboard', description: 'Real-time analytics powered by machine learning with animated visualisations.', tags: ['Next.js', 'Python', 'D3.js'], gradient: 'linear-gradient(135deg,#EA2E00,#FF6B6B)' },
-    { id: 4, title: 'Neural Canvas', description: 'Generative art platform using stable diffusion for unique digital assets.', tags: ['React', 'Python', 'AI'], gradient: 'linear-gradient(135deg,#6C63FF,#00D4FF)' },
+  const projectsFallback = [
+    { 
+      id: 1, 
+      title: 'EdZure Legal', 
+      description: 'Comprehensive legal services platform featuring secure client onboarding, case management, and seamless integrations.', 
+      tags: ['React', 'Firebase', 'Tailwind'], 
+      live_url: 'https://edzurelegal.com',
+      image_url: '/assets/edzure_legal.png'
+    },
+    { 
+      id: 2, 
+      title: 'RSA Crane Service', 
+      description: 'Corporate website for a heavy-machinery and crane service provider featuring dynamic service catalogs.', 
+      tags: ['React', 'Node.js', 'PostgreSQL'], 
+      live_url: 'https://rsacraneservice.com',
+      image_url: '/assets/rsa_crane.png'
+    }
   ]
 
-  const displayProjects = projects || (error ? fallback : null)
+  const displayProjects = projectsFallback
 
   return (
     <section className="section projects-section" id="projects">
       <div className="section-inner" style={{ perspective: '1000px' }}>
         <span className="section-tag">Selected Work</span>
-        <h2 className="section-title">
-          Projects that<br /><em>speak for themselves</em>
-        </h2>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+          <h2 className="section-title" style={{ marginBottom: 0 }}>
+            Projects that<br /><em>speak for themselves</em>
+          </h2>
+          <a href="#all-projects" className="btn btn-ghost" style={{ fontSize: '0.9rem', padding: '0.6rem 1.2rem', height: 'auto', width: 'auto' }}>
+            Open all projects ↗
+          </a>
+        </div>
 
         <ul className="projects-stack">
           {loading && Array.from({ length: 4 }).map((_, i) => <ProjectSkeleton key={i} />)}

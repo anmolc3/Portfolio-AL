@@ -79,24 +79,15 @@ body {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  backdrop-filter: blur(3px) var(--filter);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .glass-container::after,
 .glass-container-sharp-corner::after {
-  padding: 1px;
   border-radius: inherit;
-  background: linear-gradient(
-    90deg,
-    rgba(40, 40, 40, 0.3),
-    rgba(255, 255, 255, 0.3) 30% 70%,
-    rgba(40, 40, 40, 0.3)
-  );
-  filter: saturate(1.5) contrast(1.5) brightness(3);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0) padding-box;
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0) padding-box;
-  mask-composite: exclude;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  pointer-events: none;
 }
 
 .glass-container-sharp-corner {
@@ -138,15 +129,7 @@ body {
 /* ================================================================
    NOISE / GRAIN
    ================================================================ */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.4;
-}
+body::before { display: none; }
 
 /* ================================================================
    NAVBAR (New Liquid Glass Effect)
@@ -180,7 +163,8 @@ nav.glass {
   border-radius: 3rem;
   padding: 0.5rem 1rem;
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(8px) saturate(140%) url(#water-ripple);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
   /* The shadow helps ground the water pill over the page */
   box-shadow: 
     0 4px 40px rgba(0, 0, 0, 0.05), 
@@ -197,8 +181,8 @@ nav.glass {
   padding: 0.25rem 0.5rem;
   z-index: 5;
   
-  /* Apply the liquid glass morph filter seamlessly directly to the container */
-  filter: url(#liquid-glass-morph);
+  /* Apply standard drop-shadow or let icons be solid */
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
   /* The blend mode is removed because the SVG filter handles opacity natively for Light Mode */
 }
 
