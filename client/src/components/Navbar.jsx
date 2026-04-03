@@ -10,12 +10,12 @@ export default function Navbar() {
   }, [])
 
   return (
-    <nav className="navbar-one" style={{ position: 'sticky', top: '1rem', margin: '0', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }}>
-      <div className="glass-container" style={{ display: 'flex', 'height': '3rem', width: 'auto', justifyContent: 'center', alignItems: 'center', '--filter': 'url(#liquid-glass-two)', padding: '0 2rem', gap: '2rem', fontSize: '0.9rem' }}>
-        <a href="#hero" style={{ color: 'inherit', textDecoration: 'none' }}>Home</a>
-        <a href="#about" style={{ color: 'inherit', textDecoration: 'none' }}>About</a>
-        <a href="#projects" style={{ color: 'inherit', textDecoration: 'none' }}>Service</a>
-        <a href="#contact" style={{ color: 'inherit', textDecoration: 'none' }}>Contact</a>
+    <nav className={`navbar-one ${scrolled ? 'nav-scrolled' : ''}`}>
+      <div className="glass-container navbar-container">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Service</a>
+        <a href="#contact">Contact</a>
       </div>
     </nav>
   )

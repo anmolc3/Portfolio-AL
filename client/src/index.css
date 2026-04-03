@@ -1,10 +1,8 @@
-/* ================================================================
-   LIQUID OBSIDIAN DESIGN SYSTEM
-   AL Portfolio — React + FastAPI + PostgreSQL
-   Accent: #EA2E00 | BG: #0e0e13 | Fonts: Epilogue / Inter / Space Grotesk
-   ================================================================ */
+@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap");
 
-/* ── Reset & Base ─────────────────────────────────────────────── */
+/* ================================================================
+   LIQUID GLASS OBSIDIAN DESIGN SYSTEM
+   ================================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -17,20 +15,17 @@
   --accent-glow:  rgba(234,46,0,0.35);
   --accent-soft:  rgba(234,46,0,0.12);
   --white:        rgba(255,255,255,0.85);
-  --muted:        #888888;
+  --muted:        rgba(255,255,255,0.5);
   --border:       rgba(255,255,255,0.1);
-  --glass-bg:     rgba(50,50,50,0.2);
-  --glass-border: rgba(255,255,255,0.10);
-  --font-display: 'Epilogue', sans-serif;
-  --font-body:    'Inter', sans-serif;
-  --font-label:   'Space Grotesk', sans-serif;
+  --font-display: 'Arimo', sans-serif;
+  --font-body:    'Arimo', sans-serif;
   --radius:       12px;
   --radius-lg:    20px;
   --radius-pill:  999px;
   --transition:   0.3s cubic-bezier(0.4,0,0.2,1);
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
 
 body {
   font-family: var(--font-body);
@@ -54,20 +49,20 @@ body {
 }
 
 /* ================================================================
-   NEW REFRACTIVE GLASS UI
+   LIQUID GLASS SYSTEM (INSPIRATION ADAPTED)
    ================================================================ */
 .glass-container,
 .glass-container-sharp-corner {
   --filter: url(#liquid-glass-stretchy-angled);
   position: relative;
-  width: 100%;
-  padding: 1.5rem;
   border-radius: 2rem;
-  align-content: center;
   overflow: hidden;
-  background: rgba(50, 50, 50, .0);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 1);
-  color: rgba(255, 255, 255, 0.7);
+  background: transparent;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 10px rgba(5, 5, 5, 1);
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
 }
 
 .glass-container::before,
@@ -79,15 +74,42 @@ body {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-container::before,
+.glass-container-sharp-corner::before {
+  backdrop-filter: blur(3px) var(--filter);
+  -webkit-backdrop-filter: blur(14px) var(--filter);
 }
 
 .glass-container::after,
 .glass-container-sharp-corner::after {
+  padding: 1px;
   border-radius: inherit;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background: linear-gradient(
+    90deg,
+    rgba(40, 40, 40, 0.3),
+    rgba(255, 255, 255, 0.3) 30% 70%,
+    rgba(40, 40, 40, 0.3)
+  );
+  filter: saturate(1.5) contrast(1.5) brightness(3);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0) padding-box;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0) padding-box;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
   pointer-events: none;
+}
+
+/* Specific button variant from inspiration */
+.nav-btn {
+  width: 3.2rem;
+  height: 3.2rem;
+  aspect-ratio: 1/1;
+  padding: 0;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
 }
 
 .glass-container-sharp-corner {
@@ -823,13 +845,20 @@ nav.glass {
 /* ================================================================
    RESPONSIVE
    ================================================================ */
-@media (max-width: 640px) {
-  .navbar { gap: 1rem; padding: 0.5rem 0.8rem; }
-  .nav-links { display: none; }
-  .hero-stats { gap: 1rem; }
-  .stat-divider { height: 28px; }
-  .glass-title { white-space: normal; }
-  .projects-grid { grid-template-columns: 1fr; }
+@media (max-width: 768px) {
+  .section { padding: 4rem 1rem; }
+  .section-title { font-size: clamp(2rem, 8vw, 3.5rem); line-height: 1.1; }
+  .hero-title.clean-title { font-size: clamp(2.5rem, 12vw, 4.5rem); }
+  .navbar-one .glass-container { padding: 0 1rem !important; gap: 1rem !important; font-size: 0.8rem !important; }
+}
+
+@media (max-width: 480px) {
+  .section-tag { font-size: 0.7rem; }
+  .hero-subtitle { font-size: 1rem; }
+  .hero-actions { flex-direction: column; width: 100%; }
+  .hero-actions .glass-liquid-button { width: 100%; }
+  .projects-stack-item { flex-direction: column; height: auto !important; padding: 1.5rem !important; }
+  .projects-stack-item img { width: 100% !important; height: 180px !important; margin-bottom: 1rem; }
 }
 
 /* ================================================================
@@ -963,5 +992,60 @@ body.light-mode .button-liquid-specular {
     inset 1px 1px 0 rgba(0, 0, 0, 0.1),
     inset 0 0 5px rgba(0, 0, 0, 0.05),
     0 10px 20px rgba(0, 0, 0, 0.05) !important;
+} 
+
+
+/* ================================================================
+   NAVBAR-ONE REFACTOR
+   ================================================================ */
+.navbar-one {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: max-content;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: top 0.4s var(--transition);
+}
+
+.navbar-container {
+  display: flex;
+  height: 3.2rem;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2.5rem;
+  gap: 2.5rem;
+  font-size: 0.95rem;
+  border-radius: 99rem;
+}
+
+.navbar-container a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+  transition: var(--transition);
+}
+
+.navbar-container a:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.all-projects-page {
+  padding-top: 8rem;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .all-projects-page { padding-top: 5rem; }
+  .navbar-one { top: 1rem; width: 90%; }
+  .navbar-container { padding: 0 1.2rem; gap: 1.2rem; font-size: 0.85rem; width: 100%; }
 } 
 

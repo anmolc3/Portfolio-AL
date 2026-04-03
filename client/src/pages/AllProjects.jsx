@@ -45,7 +45,7 @@ export default function AllProjects() {
   ]
 
   return (
-    <div style={{ paddingTop: '8rem', minHeight: '100vh' }}>
+    <div className="all-projects-page">
       <section className="section">
         <div className="section-inner" style={{ maxWidth: '1200px' }}>
           <div style={{ display: 'flex', alignItems: 'center', marginBottom: '2rem' }}>

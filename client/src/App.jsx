@@ -26,7 +26,7 @@ export default function App() {
         <defs>
           {/* Bubble/Titles */}
           <filter id="bubble-water" x="-20%" y="-20%" width="140%" height="140%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.25" numOctaves="4" seed="12" result="bubbles" />
+            <feTurbulence type="fractalNoise" baseFrequency="0.25" numOctaves="1" seed="12" result="bubbles" />
             <feDiffuseLighting in="bubbles" lighting-color="#ffffff" surfaceScale="2" result="diffuse">
                <feDistantLight azimuth="225" elevation="60" />
             </feDiffuseLighting>
@@ -62,7 +62,7 @@ export default function App() {
 
           {/* New Liquid Glass Displacement map from user request */}
           <filter id="lg-dist" x="-20%" y="-20%" width="140%" height="140%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="92" result="noise" />
+            <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="1" seed="92" result="noise" />
             <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
             <feDisplacementMap in="SourceGraphic" in2="blurred" scale="35" xChannelSelector="R" yChannelSelector="G" />
           </filter>
@@ -119,7 +119,6 @@ export default function App() {
             <feGaussianBlur stdDeviation="1.5" />
           </filter>
 
-          {/* Genuine Water Refraction Distorter for the NavBar Backdrop */}
           <filter id="water-ripple">
             <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" result="noise" />
             <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.8 0" in="noise" result="coloredNoise" />
