@@ -65,19 +65,37 @@ export default function ThemeToggle() {
     <div className="theme-toggle-wrapper">
       <div 
         id="liquid-metal" 
-        ref={containerRef} 
         onClick={toggleTheme}
         title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
       >
+        {/* Dedicated container for the shader to prevent it from clearing UI elements */}
+        <div className="shader-container" ref={containerRef} />
+        
         <div className="outline">
-          <svg className="svg-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <div className="sign-container">
             {isDarkMode ? (
-                /* Moon Icon */
-                <path d="M512 128a384 384 0 0 0-384 384 384 384 0 0 0 384 384 381.184 381.184 0 0 0 252.16-96 32 32 0 1 0-41.6-48.64A317.184 317.184 0 0 1 512 832a320 320 0 1 1 0-640 317.184 317.184 0 0 1 156.416 41.6 32 32 0 1 0-32 55.424A381.184 381.184 0 0 0 512 128z"></path>
+              /* Half Moon */
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="sign">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
             ) : (
-                /* Sun Icon */
-                <path d="M512 704a192 192 0 1 1 192-192 192 192 0 0 1-192 192z m0-448a32 32 0 0 0 32-32V160a32 32 0 0 0-64 0v64a32 32 0 0 0 32 32z m0 512a32 32 0 0 0-32 32v64a32 32 0 0 0 64 0v-64a32 32 0 0 0-32-32z m256-256a32 32 0 0 0 32-32h64a32 32 0 0 0 0-64h-64a32 32 0 0 0-32 32 32 32 0 0 0 0 32zM160 544h64a32 32 0 0 0 0-64h-64a32 32 0 0 0 0 64z m574.08-285.44l45.248-45.248a32 32 0 1 0-45.248-45.248l-45.248 45.312a32 32 0 1 0 45.248 45.184zM289.92 734.08l-45.248 45.248a32 32 0 1 0 45.248 45.248l45.248-45.312a32 32 0 1 0-45.248-45.184z m0-444.16a32 32 0 0 0 45.248-45.248l-45.248-45.248a32 32 0 1 0-45.248 45.248l45.248 45.248z m444.16 444.16a32 32 0 0 0-45.248 45.248l45.248 45.248a32 32 0 1 0 45.248-45.248l-45.248-45.248z"></path>
+              /* Sun */
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ffcc00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="sign">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
             )}
+          </div>
+          <svg className="svg-icon-branding" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <path d="M843.968 896a51.072 51.072 0 0 1-51.968-52.032V232H180.032A51.072 51.072 0 0 1 128 180.032c0-29.44 22.528-52.032 52.032-52.032h663.936c29.44 0 52.032 22.528 52.032 52.032v663.936c0 29.44-22.528 52.032-52.032 52.032z" fill="rgba(255,255,255,0.1)"></path>
+            <path d="M180.032 896a49.92 49.92 0 0 1-36.48-15.616c-20.736-20.8-20.736-53.76 0-72.832L807.616 143.616c20.864-20.8 53.76-20.8 72.832 0 20.8 20.8 20.8 53.76 0 72.768L216.384 880.384a47.232 47.232 0 0 1-36.352 15.616z" fill="rgba(255,255,255,0.1)"></path>
           </svg>
         </div>
       </div>
@@ -96,12 +114,19 @@ export default function ThemeToggle() {
           height: 50px;
           border-radius: 50%;
           cursor: pointer;
-          overflow: hidden;
           transition: transform 0.3s ease;
         }
 
         #liquid-metal:hover {
           transform: scale(1.1);
+        }
+
+        .shader-container {
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          overflow: hidden;
+          z-index: 0;
         }
 
         #liquid-metal::before {
@@ -115,7 +140,7 @@ export default function ThemeToggle() {
           background: linear-gradient(#444, #000);
           border-radius: 50%;
           box-shadow: inset 0 0.1rem 0.1rem 0.1rem rgba(255, 255, 255, 0.3);
-          z-index: 0;
+          z-index: -1;
         }
 
         .outline {
@@ -127,6 +152,22 @@ export default function ThemeToggle() {
           justify-content: center;
           align-items: center;
           z-index: 1;
+          pointer-events: none;
+        }
+
+        .sign-container {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 10;
+        }
+
+        .sign {
+          width: 20px;
+          height: 20px;
+          filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
         }
 
         .outline::before {
@@ -148,9 +189,9 @@ export default function ThemeToggle() {
           filter: grayscale(0);
         }
 
-        .outline .svg-icon {
-          width: 20px;
-          fill: #fff;
+        .svg-icon-branding {
+          width: 24px;
+          opacity: 0.1;
           z-index: 2;
         }
       `}</style>

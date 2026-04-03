@@ -17,6 +17,8 @@ class LiquidButtonLogic {
     this.color3 = options.color3 || '#E509E6';
     this.textColor = options.textColor || '#FFFFFF';
     this.text    = options.text    || '▶';
+    this.svgPath = options.svgPath || null;
+    this.viewBoxSize = options.viewBoxSize || 24;
 
     this.layers = [{
       points: [],
@@ -181,7 +183,28 @@ class LiquidButtonLogic {
     this.context.font = '500 ' + fontSize + 'px sans-serif'; 
     this.context.textAlign = 'center';
     this.context.textBaseline = 'middle'; 
-    this.context.fillText(this.text, this.canvas.width / 2, this.canvas.height / 2, this.width - this.padding * 2);
+
+    let textX = this.canvas.width / 2;
+    
+    if (this.svgPath) {
+      const iconSize = fontSize * 1.1;
+      const spacing = 8;
+      this.context.save();
+      const textMetrics = this.context.measureText(this.text);
+      const totalWidth = iconSize + spacing + textMetrics.width;
+      const startX = (this.canvas.width - totalWidth) / 2;
+      
+      const path = new Path2D(this.svgPath);
+      this.context.translate(startX, (this.canvas.height - iconSize) / 2);
+      const scale = iconSize / this.viewBoxSize; 
+      this.context.scale(scale, scale);
+      this.context.fill(path);
+      this.context.restore();
+      
+      textX = startX + iconSize + spacing + textMetrics.width / 2;
+    }
+
+    this.context.fillText(this.text, textX, this.canvas.height / 2, this.width - this.padding * 2);
   }
 
   createPoint(x, y) {
@@ -240,13 +263,15 @@ class LiquidButtonLogic {
 
 export default function LiquidButton({ 
   text = 'Button', 
+  svgPath,
+  viewBoxSize = 24,
   onClick, 
   href, 
   width = 200, 
   height = 50,
-  color1 = 'rgba(255, 255, 255, 0.05)', // Core transparent glass body
-  color2 = 'rgba(255, 255, 255, 0.15)', // Glass hit highlight 1
-  color3 = 'rgba(255, 255, 255, 0.4)',  // Glass hit highlight 2
+  color1 = 'rgba(255, 255, 255, 0.05)', 
+  color2 = 'rgba(255, 255, 255, 0.15)', 
+  color3 = 'rgba(255, 255, 255, 0.4)',  
   textColor = '#FFFFFF',
   className = ''
 }) {
@@ -260,13 +285,15 @@ export default function LiquidButton({
     buttonRef.current = new LiquidButtonLogic({
       canvas: canvasRef.current,
       text: text,
+      svgPath: svgPath,
+      viewBoxSize: viewBoxSize,
       width: width,
       height: height,
       color1: color1,
       color2: color2,
       color3: color3,
       textColor: textColor,
-      margin: 30, // Space for gooey liquid overhang
+      margin: 30,
     });
 
     return () => {
@@ -274,7 +301,7 @@ export default function LiquidButton({
         buttonRef.current.destroy();
       }
     };
-  }, [text, width, height, color1, color2, color3, textColor]);
+  }, [text, svgPath, viewBoxSize, width, height, color1, color2, color3, textColor]);
 
   // Adjust container style to match actual functional area (ignoring margin bleed)
   const style = {
