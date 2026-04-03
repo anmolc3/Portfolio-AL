@@ -920,9 +920,9 @@ body.light-mode {
   --glass-border: rgba(0,0,0,0.08);
 }
 
-body.light-mode .background-painting {
-  filter: brightness(1.2) saturate(0.6) opacity(0.3);
-  background-color: #f8f9fa;
+body.light-mode #canvas-liquid-bg {
+  filter: brightness(1.8) saturate(0.2) opacity(0.3) contrast(1.2);
+  background-color: #f8f9fa !important;
 }
 
 body.light-mode .glass-container,

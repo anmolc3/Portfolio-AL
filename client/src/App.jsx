@@ -5,6 +5,7 @@ import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ThemeToggle from './components/ThemeToggle'
+import LiquidHeroBackground from './components/LiquidHeroBackground'
 
 export default function App() {
   return (
@@ -145,7 +146,7 @@ export default function App() {
         </defs>
       </svg>
 
-      <div className="background-painting" />
+      <LiquidHeroBackground />
       <Navbar />
       <main>
         <Hero />
