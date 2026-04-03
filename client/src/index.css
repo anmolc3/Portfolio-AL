@@ -904,3 +904,55 @@ nav.glass {
   .glass-title { white-space: normal; }
   .projects-grid { grid-template-columns: 1fr; }
 }
+
+/* ================================================================
+   LIGHT MODE OVERRIDES
+   ================================================================ */
+body.light-mode {
+  --bg:           #f8f9fa;
+  --surface:      #ffffff;
+  --surface-mid:  #f1f3f5;
+  --surface-high: #e9ecef;
+  --white:        #212529;
+  --muted:        #495057;
+  --border:       rgba(0,0,0,0.08);
+  --glass-bg:     rgba(255,255,255,0.4);
+  --glass-border: rgba(0,0,0,0.08);
+}
+
+body.light-mode .background-painting {
+  filter: brightness(1.2) saturate(0.6) opacity(0.3);
+  background-color: #f8f9fa;
+}
+
+body.light-mode .glass-container,
+body.light-mode .glass-container-sharp-corner {
+  color: #212529;
+  text-shadow: none;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+}
+
+body.light-mode .section-title {
+  color: #212529;
+}
+
+body.light-mode .section-body {
+  color: #495057;
+}
+
+body.light-mode .navbar-one a {
+  color: #212529 !important;
+}
+
+body.light-mode .projects-stack-item {
+  background: rgba(255,255,255,0.7);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+}
+
+body.light-mode .projects-stack-item .content-text h3 {
+  color: #212529;
+}
+
+body.light-mode .projects-stack-item .content-text p {
+  color: #495057;
+}

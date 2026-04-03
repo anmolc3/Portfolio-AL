@@ -4,10 +4,12 @@ import About from './components/About'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import ThemeToggle from './components/ThemeToggle'
 
 export default function App() {
   return (
     <>
+      <ThemeToggle />
       {/* SVG filter definitions — liquid glass effect */}
       <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
