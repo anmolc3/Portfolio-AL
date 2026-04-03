@@ -13,5 +13,19 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <!--for smoother animation-->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@latest/bundled/lenis.min.js"></script>
+    <script>
+      const lenis = new Lenis({
+        duration: 2.0, // gives weight, controls the smoothness (higher = smoother)
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // The easing makes the scroll start quickly, then slow down exponentially just like real-world momentum.
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    </script>
   </body>
 </html>

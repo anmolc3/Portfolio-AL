@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import LiquidGlassTitle from './LiquidGlassTitle'
+import LiquidButton from './LiquidButton'
 
 function AnimatedStat({ target, suffix }) {
   const ref = useRef(null)
@@ -56,7 +57,7 @@ export default function Hero() {
           Available for work
         </p>
 
-        <LiquidGlassTitle text="DUOFOLD STUDIO" />
+        <LiquidGlassTitle text="DuoPortFolio" />
 
         <p className="hero-subtitle">
           We craft immersive digital experiences with clean code,<br />
@@ -64,17 +65,7 @@ export default function Hero() {
         </p>
 
         <div className="hero-actions">
-          <a href="#projects" className="glass-container glass-container--nav" id="view-work-btn" style={{ textDecoration: 'none', display: 'inline-flex', cursor: 'pointer' }}>
-            <div className="glass-filter-nav"></div>
-            <div className="glass-overlay-nav"></div>
-            <div className="glass-specular-nav"></div>
-            <div className="glass-content-nav" style={{ padding: '0.85rem 1.75rem', gap: '0.75rem' }}>
-              <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--lg-grey)' }}>View My Work</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--lg-red)">
-                <path d="M3 8h10M9 4l4 4-4 4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-          </a>
+          <LiquidButton text="View My Work ↗" href="#projects" />
         </div>
 
         <div className="hero-stats">

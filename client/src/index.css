@@ -8,18 +8,18 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:           #F0E7D6;
-  --surface:      #ffffff;
-  --surface-mid:  #f5f5f5;
-  --surface-high: #eaeaea;
+  --bg:           #111111;
+  --surface:      #1a1a1a;
+  --surface-mid:  #222222;
+  --surface-high: #2a2a2a;
   --accent:       #EA2E00;
   --accent-dim:   #e02c00;
   --accent-glow:  rgba(234,46,0,0.35);
   --accent-soft:  rgba(234,46,0,0.12);
-  --white:        #111111;
-  --muted:        #5b5b5b;
-  --border:       rgba(0,0,0,0.1);
-  --glass-bg:     rgba(255,255,255,0.04);
+  --white:        rgba(255,255,255,0.7);
+  --muted:        #999999;
+  --border:       rgba(255,255,255,0.1);
+  --glass-bg:     rgba(50,50,50,0.2);
   --glass-border: rgba(255,255,255,0.10);
   --font-display: 'Epilogue', sans-serif;
   --font-body:    'Inter', sans-serif;
@@ -34,12 +34,96 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-body);
-  background: var(--bg);
+  background: #f3f4f6; /* Fallback for the painting */
   color: var(--white);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
+
+.background-painting {
+  background: url("https://i0.wp.com/picjumbo.com/wp-content/uploads/orange-leaves-free-image.jpeg?w=2210&quality=70") repeat center/cover;
+  background-color: #2b3d25;
+  position: fixed;
+  top: 0;
+  left: 0;
+  inset: 0;
+  z-index: -99;
+}
+
+/* ================================================================
+   NEW REFRACTIVE GLASS UI
+   ================================================================ */
+.glass-container,
+.glass-container-sharp-corner {
+  --filter: url(#liquid-glass-stretchy-angled);
+  position: relative;
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 2rem;
+  align-content: center;
+  overflow: hidden;
+  background: rgba(50, 50, 50, .0);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+  text-shadow: 0 0 5px rgba(5, 5, 5, 0.7);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.glass-container::before,
+.glass-container::after,
+.glass-container-sharp-corner::before,
+.glass-container-sharp-corner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  backdrop-filter: blur(3px) var(--filter);
+}
+
+.glass-container::after,
+.glass-container-sharp-corner::after {
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    rgba(40, 40, 40, 0.3),
+    rgba(255, 255, 255, 0.3) 30% 70%,
+    rgba(40, 40, 40, 0.3)
+  );
+  filter: saturate(1.5) contrast(1.5) brightness(3);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0) padding-box;
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0) padding-box;
+  mask-composite: exclude;
+}
+
+.glass-container-sharp-corner {
+  --filter: url(#liquid-glass-stretchy-angled-radius-0rem);
+  border-radius: 0.5rem;
+}
+
+.card-one { border-radius: 50vw; min-height: 5rem; }
+.card-two { min-height: 10rem; border-radius: 2.2rem; }
+.card-three { border-radius: 0.5rem; min-height: 24rem; padding: 1rem 2rem; }
+
+.btn {
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 10px rgba(5, 5, 5, 1);
+  border: none;
+  border-radius: 50vw;
+  width: 10rem;
+  height: 5rem;
+  font-size: 1.5rem;
+  transition: 0.2s all ease;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn:active { scale: 0.8; }
+.btn-round { width: 5rem; height: 5rem; }
 
 /* ── Scrollbar ─────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
@@ -74,110 +158,85 @@ body::before {
   --lg-grey: #444739;
 }
 
-.navbar-wrapper {
+#navbar {
   position: fixed;
-  top: 20px;
+  top: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
   width: max-content;
-  max-width: calc(100vw - 40px);
+  min-width: 280px;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.glass-container--nav {
+/* 🫧 LIQUID GLASS - Light Theme Optimized */
+nav.glass {
+  position: relative;
+  overflow: visible;
+  border-radius: 3rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px) saturate(140%) url(#water-ripple);
+  /* The shadow helps ground the water pill over the page */
+  box-shadow: 
+    0 4px 40px rgba(0, 0, 0, 0.05), 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.icons {
   position: relative;
   display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
   align-items: center;
-  background: transparent;
-  border-radius: 3rem;
-  overflow: hidden;
-  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
-  color: var(--lg-text);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  z-index: 5;
+  
+  /* Apply the liquid glass morph filter seamlessly directly to the container */
+  filter: url(#liquid-glass-morph);
+  /* The blend mode is removed because the SVG filter handles opacity natively for Light Mode */
 }
 
-.glass-filter-nav,
-.glass-overlay-nav,
-.glass-specular-nav {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-}
-
-.glass-filter-nav {
-  z-index: 0;
-  backdrop-filter: blur(4px);
-  filter: url(#lensFilter) saturate(120%) brightness(1.15);
-}
-
-.glass-overlay-nav {
-  z-index: 1;
-  background: var(--lg-bg-color);
-}
-
-.glass-specular-nav {
-  z-index: 2;
-  box-shadow: inset 1px 1px 0 var(--lg-highlight),
-    inset 0 0 5px var(--lg-highlight);
-}
-
-.glass-content-nav {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 12px 28px;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.nav-logo {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 1.2rem;
-  color: var(--lg-grey);
-  letter-spacing: -0.02em;
-  padding: 0.3rem 0.8rem;
-  border-radius: var(--radius-pill);
-  background: rgba(255,255,255,0.4);
-  border: 1px solid rgba(0,0,0,0.1);
+.icon-link {
   text-decoration: none;
+  display: block;
+  z-index: 20;
 }
 
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 0.2rem;
+.icon {
+  pointer-events: all;
+  width: 3.25rem;
+  aspect-ratio: 1;  
+  border-radius: 1.5rem;
+  background: #fff;
+  padding: 0.85rem;
+  margin: -0.1rem;
+  cursor: pointer;
+  overflow: visible;
+  color: #000;
+  display: block;
+  transition: 
+    scale 1s linear(0, 0.038 1.6%, 0.154 3.4%, 1.026 12.6%, 1.166 15.2%, 1.234 18%, 1.221 21.6%, 1.005 31.2%, 0.944 37%, 1.013 56%, 1);
+  will-change: transform;
 }
 
-.nav-links a {
-  font-family: var(--font-label);
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--lg-grey);
-  text-decoration: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 3rem;
-  transition: var(--transition);
-  letter-spacing: 0.02em;
+.icon:hover {
+  scale: 1.2;
 }
-.nav-links a:hover { color: var(--lg-red); background: rgba(0,0,0,0.05); }
 
-.nav-cta {
-  font-family: var(--font-label);
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #fff;
-  text-decoration: none;
-  padding: 0.45rem 1rem;
-  background: var(--lg-red);
-  border-radius: var(--radius-pill);
-  letter-spacing: 0.03em;
-  transition: var(--transition);
-  box-shadow: 0 4px 12px rgba(251, 66, 104, 0.4);
+.icon:active {
+  scale: 0.85;
+  transition-duration: 130ms;
+  transition-timing-function: ease-out;
 }
-.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(251, 66, 104, 0.6); }
+
+.navbar--scrolled {
+  top: 1rem;
+}
 
 /* ================================================================
    HERO SECTION

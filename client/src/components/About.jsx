@@ -5,7 +5,7 @@ export default function About() {
 
   return (
     <section className="section about-section" id="about">
-      <div className="section-inner">
+      <div className="glass-container-sharp-corner card-three section-inner">
         <span className="section-tag">About Me</span>
         <h2 className="section-title">
           Turning ideas into<br /><em>digital art</em>

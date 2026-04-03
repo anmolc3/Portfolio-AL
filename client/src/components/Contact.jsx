@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import LiquidButton from './LiquidButton'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
@@ -30,7 +31,7 @@ export default function Contact() {
 
   return (
     <section className="section contact-section" id="contact">
-      <div className="section-inner contact-inner">
+      <div className="glass-container-sharp-corner card-three section-inner contact-inner">
         <span className="section-tag">Let's Talk</span>
         <h2 className="section-title">
           Ready to build<br /><em>something great?</em>
@@ -87,19 +88,11 @@ export default function Contact() {
               <div className="form-error">⚠ {errMsg}</div>
             )}
 
-            <button
-              type="submit"
-              className="btn btn-primary"
-              id="submit-btn"
-              disabled={status === 'loading'}
-            >
-              <span>{status === 'loading' ? 'Sending…' : 'Send Message'}</span>
-              {status !== 'loading' && (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M2 8l12-6-6 12-2-4-4-2z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-                </svg>
-              )}
-            </button>
+            <LiquidButton 
+              text={status === 'loading' ? 'Sending…' : 'Send Message ↗'}
+              width={250}
+              className="liquid-submit"
+            />
           </form>
         )}
       </div>

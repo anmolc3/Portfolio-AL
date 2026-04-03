@@ -1,8 +1,9 @@
 import { useFetch } from '../hooks/useFetch'
+import LiquidButton from './LiquidButton'
 
 function ProjectCard({ project }) {
   return (
-    <div className="project-card" id={`project-${project.id}`}>
+    <div className="glass-container card-two project-card" id={`project-${project.id}`} style={{ '--filter': 'url(#liquid-glass-stretchy-angled-radius-0rem)' }}>
       <div
         className="project-img"
         style={{ background: project.gradient }}
@@ -18,14 +19,14 @@ function ProjectCard({ project }) {
         {(project.live_url || project.github_url) && (
           <div className="project-links">
             {project.live_url && (
-              <a href={project.live_url} target="_blank" rel="noopener noreferrer" className="project-link primary">
-                Live ↗
-              </a>
+              <div style={{ pointerEvents: 'auto' }}>
+                <LiquidButton text="Live ↗" href={project.live_url} width={120} height={40} />
+              </div>
             )}
             {project.github_url && (
-              <a href={project.github_url} target="_blank" rel="noopener noreferrer" className="project-link">
-                GitHub
-              </a>
+              <div style={{ pointerEvents: 'auto' }}>
+                <LiquidButton text="GitHub" href={project.github_url} width={120} height={40} />
+              </div>
             )}
           </div>
         )}
@@ -61,7 +62,7 @@ export default function Projects() {
 
   return (
     <section className="section projects-section" id="projects">
-      <div className="section-inner">
+      <div className="glass-container-sharp-corner card-three section-inner">
         <span className="section-tag">Selected Work</span>
         <h2 className="section-title">
           Projects that<br /><em>speak for themselves</em>
