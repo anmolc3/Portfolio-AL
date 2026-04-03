@@ -956,7 +956,7 @@ body.light-mode .projects-stack-item .content-text p {
   box-shadow: 
     inset 1px 1px 0 rgba(255, 255, 255, 0.4),
     inset 0 0 5px rgba(255, 255, 255, 0.2),
-    0 10px 20px rgba(0, 0, 0, 0.3);
+    0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .button-liquid-content {
@@ -965,5 +965,19 @@ body.light-mode .projects-stack-item .content-text p {
   display: flex;
   align-items: center;
   gap: 12px;
+} 
+
+
+body.light-mode .glass-liquid-button {
+  color: #212529 !important;
+}
+body.light-mode .button-liquid-overlay {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+body.light-mode .button-liquid-specular {
+  box-shadow: 
+    inset 1px 1px 0 rgba(0, 0, 0, 0.1),
+    inset 0 0 5px rgba(0, 0, 0, 0.05),
+    0 10px 20px rgba(0, 0, 0, 0.05) !important;
 } 
 
