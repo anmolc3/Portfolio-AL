@@ -17,8 +17,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@latest/bundled/lenis.min.js"></script>
     <script>
       const lenis = new Lenis({
-        duration: 2.0, // gives weight, controls the smoothness (higher = smoother)
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // The easing makes the scroll start quickly, then slow down exponentially just like real-world momentum.
+        duration: 1.2,
+        lerp: 0.1,
+        smoothWheel: true,
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        wheelMultiplier: 1.0,
+        touchMultiplier: 2.0,
       });
 
       function raf(time) {

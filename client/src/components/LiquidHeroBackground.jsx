@@ -44,16 +44,7 @@ export default function LiquidHeroBackground() {
     <canvas 
       id="canvas-liquid-bg" 
       ref={canvasRef} 
-      style={{ 
-        position: 'fixed', 
-        top: 0, 
-        left: 0, 
-        width: '100%', 
-        height: '100%', 
-        zIndex: -99, 
-        pointerEvents: 'none',
-        background: '#000'
-      }} 
+      className="liquid-background-canvas"
     />
   );
 }

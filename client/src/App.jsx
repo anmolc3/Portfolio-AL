@@ -26,9 +26,7 @@ export default function App() {
               <fePointLight x="-50" y="-100" z="200" />
             </feSpecularLighting>
             <feComposite in="specular" in2="SourceAlpha" operator="in" result="specular-clip" />
-            <feTurbulence type="turbulence" baseFrequency="0.015 0.012" numOctaves="2" seed="5" result="noise">
-               <animate attributeName="seed" dur="15s" values="5; 100; 5" repeatCount="indefinite" />
-            </feTurbulence>
+            <feTurbulence type="turbulence" baseFrequency="0.015 0.012" numOctaves="1" seed="5" result="noise" />
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G" result="warped" />
             <feMerge>
               <feMergeNode in="warped" />
@@ -37,9 +35,7 @@ export default function App() {
             </feMerge>
           </filter>
           <filter id="liquid-distort" x="-20%" y="-20%" width="140%" height="140%" colorInterpolationFilters="sRGB">
-            <feTurbulence type="fractalNoise" baseFrequency="0.015 0.012" numOctaves="3" seed="5" result="noise">
-              <animate attributeName="baseFrequency" dur="20s" values="0.015 0.012; 0.018 0.015; 0.015 0.012" repeatCount="indefinite" />
-            </feTurbulence>
+            <feTurbulence type="fractalNoise" baseFrequency="0.015 0.012" numOctaves="1" seed="5" result="noise" />
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="35" xChannelSelector="R" yChannelSelector="G" result="displaced" />
             <feGaussianBlur in="displaced" stdDeviation="0.4" result="blurred" />
             <feComposite in="blurred" in2="SourceGraphic" operator="atop" />
