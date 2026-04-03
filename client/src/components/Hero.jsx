@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import LiquidGlassTitle from './LiquidGlassTitle'
-import LiquidButton from './LiquidButton'
+import GlassLiquidButton from './GlassLiquidButton'
 
 function AnimatedStat({ target, suffix }) {
   const ref = useRef(null)
@@ -57,7 +57,7 @@ export default function Hero() {
           Available for work
         </p>
 
-        <LiquidGlassTitle text="DuoPortFolio" />
+        <h1 className="hero-title clean-title">DuoPortFolio</h1>
 
         <p className="hero-subtitle">
           We craft immersive digital experiences with clean code,<br />
@@ -65,10 +65,9 @@ export default function Hero() {
         </p>
 
         <div className="hero-actions">
-          <LiquidButton 
+          <GlassLiquidButton 
             text="View My Work" 
             href="#projects" 
-            width={240}
             viewBoxSize={30}
             svgPath="M14.217,19.707l-1.112,2.547c-0.427,0.979-1.782,0.979-2.21,0l-1.112-2.547c-0.99-2.267-2.771-4.071-4.993-5.057L1.73,13.292c-0.973-0.432-0.973-1.848,0-2.28l2.965-1.316C6.974,8.684,8.787,6.813,9.76,4.47l1.126-2.714c0.418-1.007,1.81-1.007,2.228,0L14.24,4.47c0.973,2.344,2.786,4.215,5.065,5.226l2.965,1.316c0.973,0.432,0.973,1.848,0,2.28l-3.061,1.359C16.988,15.637,15.206,17.441,14.217,19.707z"
           />

@@ -67,7 +67,6 @@ body {
   overflow: hidden;
   background: rgba(50, 50, 50, .0);
   box-shadow: 0 0 20px rgba(0, 0, 0, 1);
-  text-shadow: 0 0 5px rgba(5, 5, 5, 0.7);
   color: rgba(255, 255, 255, 0.7);
 }
 
@@ -338,74 +337,19 @@ nav.glass {
 }
 
 /* ================================================================
-   3-LAYER LIQUID GLASS TITLE
+   CLEAN HERO TITLE
    ================================================================ */
-.glass-title-wrapper {
-  position: relative;
-  display: inline-block;
+.hero-title.clean-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 10vw, 7.5rem);
+  font-weight: 950;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
   margin-bottom: 2rem;
-  line-height: 1.05;
-  text-align: center;
-}
-
-.glass-title {
-  font-family: 'Lilita One', cursive;
-  font-size: clamp(3.5rem, 8.5vw, 8rem);
-  font-weight: normal;
-  letter-spacing: 0.08em;
-  line-height: 1.05;
-  white-space: nowrap;
-  display: block;
-  text-transform: uppercase;
-}
-
-/* Layer 1 — Depth / Shadow (RGB Accent) */
-.layer-depth {
-  position: absolute;
-  top: 5px; left: 5px;
-  color: rgb(234, 46, 0);
-  opacity: 0.25;
-  transform: scale(1.02);
-  transform-origin: center center;
-  filter: blur(8px);
-  pointer-events: none;
-  user-select: none;
-  z-index: 1;
-  display: block;
-}
-
-/* Layer 2 — Glass (main) */
-.layer-glass {
+  line-height: 0.95;
   position: relative;
-  color: rgba(255, 255, 255, 0.4);
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 1);
-  filter: url(#bubble-water) url(#liquid-distort);
-  z-index: 2;
-  backdrop-filter: blur(2px);
-}
-
-/* Layer 3 — Glow (REMOVED) */
-.layer-glow {
-  display: none;
-}
-
-/* Layer 4 — Accessible / readable */
-.layer-accessible {
-  position: absolute;
-  top: 0; left: 0;
-  color: rgba(255, 255, 255, 0.3);
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
-  z-index: 4;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  opacity: 0.9;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-@keyframes glowPulse {
-  0%,100% { opacity: 0.45; filter: blur(10px) url(#glow-filter); }
-  50%      { opacity: 0.60; filter: blur(14px) url(#glow-filter); }
+  z-index: 5;
 }
 
 /* ── Hero subtitle ─────────────────────────────────────────────── */
@@ -568,10 +512,7 @@ nav.glass {
 }
 .section-title em {
   font-style: normal;
-  background: linear-gradient(135deg, var(--accent), #ff8c6b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent);
 }
 .section-body {
   font-size: 1.05rem;
@@ -958,3 +899,71 @@ body.light-mode .projects-stack-item .content-text h3 {
 body.light-mode .projects-stack-item .content-text p {
   color: #495057;
 }
+
+/* ================================================================
+   USER REQUESTED LIQUID GLASS BUTTONS
+   ================================================================ */
+.glass-liquid-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 2rem;
+  border-radius: 99rem;
+  background: transparent;
+  border: none;
+  color: #888;
+  font-family: var(--font-label);
+  font-weight: 600;
+  cursor: pointer;
+  overflow: visible;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.glass-liquid-button:hover {
+  transform: scale(1.05);
+}
+
+.glass-liquid-button:active {
+  transform: scale(0.95);
+}
+
+.button-liquid-filter {
+  position: absolute;
+  inset: -15px;
+  z-index: 0;
+  backdrop-filter: blur(4px);
+  filter: url(#lg-dist);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.button-liquid-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.button-liquid-specular {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: 
+    inset 1px 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 0 5px rgba(255, 255, 255, 0.2),
+    0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.button-liquid-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+} 
+

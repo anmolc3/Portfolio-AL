@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import LiquidButton from './LiquidButton'
+import GlassLiquidButton from './GlassLiquidButton'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
@@ -88,9 +88,8 @@ export default function Contact() {
               <div className="form-error">⚠ {errMsg}</div>
             )}
 
-            <LiquidButton 
+            <GlassLiquidButton 
               text={status === 'loading' ? 'Sending…' : 'Send Message ↗'}
-              width={250}
               className="liquid-submit"
             />
           </form>

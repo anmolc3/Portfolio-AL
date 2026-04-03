@@ -50,6 +50,13 @@ export default function App() {
             </feMerge>
           </filter>
 
+          {/* New Liquid Glass Displacement map from user request */}
+          <filter id="lg-dist" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="92" result="noise" />
+            <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
+            <feDisplacementMap in="SourceGraphic" in2="blurred" scale="35" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+
           {/* Liquid Glass — Advanced Bit Packing (Cubiq) */}
           {/* Liquid Glass — Smooth Wavy Morphing (Light Theme Optimized) */}
           <filter id="liquid-glass-morph" x="-30%" y="-30%" width="160%" height="160%">
